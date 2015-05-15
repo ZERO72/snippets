@@ -1,0 +1,36 @@
+.layer {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: block;
+  pointer-events: none; }
+  .layer .visiblePainted {
+    pointer-events: visiblePainted; }
+
+* {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color: transparent;
+  /* prevent tap highlight color / shadow */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */ }
+
+html {
+  height: 100%;
+  width: 100%; }
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  background: #192e42; }
+
+.float-btn {
+  stroke-width: 0;
+  stroke: #0281c3; }
+
+.float-ctn {
+  position: fixed; }

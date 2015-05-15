@@ -1,0 +1,190 @@
+#%RAML 0.8
+title: Steroids Data
+mediaType: application/json
+baseUri: https://rest-api.appgyver.com/v1/
+
+traits:
+  - securedBySteroidsApiKey:
+      headers:
+        steroidsApiKey:
+          type: string
+          example: exampleapikey
+          default: 95c3ba01cf3ad32c1e197638ac4b66e84d6af38713688d0f575ec87f0ab16eea
+        steroidsAppId:
+          type: integer
+          example: 1234
+          default: 55176
+
+
+resourceTypes:
+  - dolan_db_collection:
+      usage: This resourceType should be used for any collection of items
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "collection"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "objects"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_collection # e.g cars
+      post:
+        description: |
+          {
+            "action": "create",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName>>_member
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member # e.g. car
+
+  - dolan_db_member:
+      usage: This resourceType should be used for any built.io item
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "find"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member # e.g. car
+      put:
+        description: |
+          {
+            "action": "update",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName>>_member
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member
+      delete:
+        description: |
+          {
+            "action": "destroy"
+          }
+        responses:
+          200:
+
+
+/Post:
+  description: |
+    {
+      "resourceName": "Post",
+      "identifierKey": ""
+    }
+  get:
+    is: [ securedBySteroidsApiKey ]
+    description: |
+      {
+        "action": "collection"
+      }
+  
+    responses:
+      200:
+        description: |
+          {
+          }
+  
+        body:
+          application/json:
+            schema: |
+              {"$schema":"http://json-schema.org/schema","title":"Post collection","type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Post representation","properties":{"status":{"type":"string"},"count":{"type":"integer"},"count_total":{"type":"integer"},"pages":{"type":"integer"},"posts":{"type":"array"},"query":{"type":"object"}},"required":[]}}
+  
+  post:
+    is: [ securedBySteroidsApiKey ]
+    description: |
+      {
+        "action": "create"
+      }
+  
+    responses:
+      200:
+        description: |
+          {
+          }
+  
+        body:
+          application/json:
+            schema: |
+              {"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Post representation","properties":{"status":{"type":"string"},"count":{"type":"integer"},"count_total":{"type":"integer"},"pages":{"type":"integer"},"posts":{"type":"array"},"query":{"type":"object"}},"required":[]}
+  
+
+  /{id}:
+    get:
+      is: [ securedBySteroidsApiKey ]
+      description: |
+        {
+          "action": "find"
+        }
+    
+      responses:
+        200:
+          description: |
+            {
+            }
+    
+          body:
+            application/json:
+              schema: |
+                {"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Post representation","properties":{"status":{"type":"string"},"count":{"type":"integer"},"count_total":{"type":"integer"},"pages":{"type":"integer"},"posts":{"type":"array"},"query":{"type":"object"}},"required":[]}
+    
+    put:
+      is: [ securedBySteroidsApiKey ]
+      description: |
+        {
+          "action": "update"
+        }
+    
+      responses:
+        200:
+          description: |
+            {
+            }
+    
+          body:
+            application/json:
+              schema: |
+                {"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Post representation","properties":{"status":{"type":"string"},"count":{"type":"integer"},"count_total":{"type":"integer"},"pages":{"type":"integer"},"posts":{"type":"array"},"query":{"type":"object"}},"required":[]}
+    
+    delete:
+      is: [ securedBySteroidsApiKey ]
+      description: |
+        {
+          "action": "destroy"
+        }
+    
+      responses:
+        200:
+
+

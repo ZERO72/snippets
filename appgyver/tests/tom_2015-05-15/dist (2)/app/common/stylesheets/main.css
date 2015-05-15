@@ -1,0 +1,46 @@
+
+/* line 4, main.scss */
+* {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color: transparent;
+  /* prevent tap highlight color / shadow */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */ }
+
+/* line 14, main.scss */
+html {
+  height: 100%;
+  width: 100%;  }
+
+/* line 19, main.scss */
+body {
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  background: #fff; }
+
+/* line 27, main.scss */
+.float-btn {
+  stroke-width: 0;
+  stroke: #0281c3; }
+
+/* line 32, main.scss */
+.float-ctn {
+  position: fixed; }
+
+/* line 1, scss/_float.scss */
+.layer {
+  height: 100%;
+  width: 100%;
+  top:0;
+  left: 0;
+  position: fixed;
+  display: block;
+  pointer-events: none; }
+  /* line 8, scss/_float.scss */
+  .layer .visiblePainted {
+    pointer-events: visiblePainted; }

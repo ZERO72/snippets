@@ -1,0 +1,36 @@
+{
+  "preloads": [
+    {
+      "id": "dashboard",
+      "location": "http://localhost/app/dashboard/detail.html"
+    },
+    {
+      "id": "greensock",
+      "location": "http://localhost/app/greensock/index.html"
+    },
+    {
+      "id": "using-the-scanner",
+      "location": "http://localhost/app/example/using-the-scanner.html"
+    }
+  ],
+  "tabs": [
+    {
+      "position": 0,
+      "id": "artikelen",
+      "title": "Artikelen",
+      "target_url": "http://localhost/app/dashboard/index.html"
+    },
+    {
+      "position": 1,
+      "id": "greensock",
+      "title": "greensock",
+      "target_url": "http://localhost/app/greensock/index.html"
+    },
+    {
+      "position": 2,
+      "id": "internet",
+      "title": "Internet",
+      "target_url": "http://stockids.com/app/"
+    }
+  ]
+}

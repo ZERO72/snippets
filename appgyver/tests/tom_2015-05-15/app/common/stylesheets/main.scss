@@ -1,0 +1,34 @@
+
+@import "scss/float";
+
+* {
+-webkit-touch-callout:none; /* prevent callout to copy image, etc when tap to hold */
+-webkit-text-size-adjust:none; /* prevent webkit from resizing text to fit */
+-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent tap highlight color / shadow */
+-webkit-user-select:none; /* prevent copy paste, to allow, change 'none' to 'text' */
+} 
+
+$colorFocus : #0281C3;
+$colorBackground : #192E42;
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	margin: 0;
+	background: $colorBackground;
+}
+
+.float-btn {
+	stroke-width : 0;
+	stroke : $colorFocus;
+}
+
+.float-ctn {
+	position: fixed;
+}
