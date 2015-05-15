@@ -1,0 +1,48 @@
+/***********************************************************
+ * These styles apply for native components on iOS.
+ * Read more about native styles at http://docs.appgyver.com
+ ***********************************************************/
+
+navigation-bar {
+  background-color: white;
+  color: black;
+}
+
+navigation-bar title {
+  color: black;
+  font-size: 22px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+navigation-bar button, navigation-bar back-bar-button {
+  color: #ffffff;
+  font-weight: 300;
+}
+
+tab-bar {
+  background-color: black;
+  border-top: 1px #d8d8d8 solid;
+}
+
+tab-bar tab-bar-item {
+  color: white;
+  font-family: "Avenir";
+  font-size: 10px;
+}
+
+tab-bar tab-bar-item:selected {
+  color: white;
+}
+
+tab-bar-item#settings {
+  background-image: url(icons/cog.svg);
+}
+
+tab-bar-item#index {
+  background-image: url(icons/home.svg);
+}
+
+tab-bar-item#internet {
+  background-image: url(icons/search.svg);
+}

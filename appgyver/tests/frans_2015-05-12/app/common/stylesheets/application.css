@@ -1,0 +1,29 @@
+.supersonic-navbar-mock {
+	background-color: #00B5FF !important;
+	text-align: center;
+	font-weight: 600;
+}
+
+
+/*### CUSTOM ####*/
+
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	background: white;
+}
+
+.clm-set-2 .clm {
+	width: 50%;
+	float: left;
+	padding: 10px;
+}
+
+.clm-set-2 .clm img {
+	max-width: 100%;
+}

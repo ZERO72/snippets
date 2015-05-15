@@ -1,0 +1,31 @@
+<div ng-controller="IndexController">
+  <super-navbar>
+    <super-navbar-title>
+      Post Index
+    </super-navbar-title>
+  </super-navbar>
+
+  <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+  <div ng-hide="showSpinner">
+    <ul class="list" ng-hide="posts.length == 0">
+
+      <super-navigate location="post#show" data-params-id="{{ post.id }}" ng-repeat="post in posts">
+        <li class="item item-icon-right">
+          <span ng-bind="post['status']"></span>
+          <i class="icon super-ios7-arrow-right"></i>
+        </li>
+      </super-navigate>
+
+    </ul>
+
+    <h4 ng-show="posts.length == 0" class="assertive padding">
+      No posts found. Create one?
+    </h4>
+
+    <super-modal-show location="post#new">
+      <button class="button button-full button-positive">
+        Create a new post
+      </button>
+    </super-modal-show>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title>
+      Show
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+      <h2 ng-bind="post['status']"></h2>
+      
+      
+      
+       <p>count: <span ng-bind="post['count']"></span></p> 
+      
+       <p>count_total: <span ng-bind="post['count_total']"></span></p> 
+      
+       <p>pages: <span ng-bind="post['pages']"></span></p> 
+      
+       <p>posts: <span ng-bind="post['posts']"></span></p> 
+      
+       <p>query: <span ng-bind="post['query']"></span></p> 
+      
+
+
+      <super-modal-show location="post#edit?id={{ post.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(post.id)" class="button button-block button-negative">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
