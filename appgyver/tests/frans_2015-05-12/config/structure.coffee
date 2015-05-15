@@ -26,6 +26,10 @@ module.exports =
 
   preloads: [
     {
+      id: "dashboard"
+      location: "dashboard#detail"
+    }
+    {
       id: "learn-more"
       location: "example#learn-more"
     }

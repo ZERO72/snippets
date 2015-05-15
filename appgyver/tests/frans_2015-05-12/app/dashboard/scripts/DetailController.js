@@ -1,6 +1,4 @@
-angular
-  .module('dashboard')
-  .controller('DetailController', function($scope, supersonic, article, $sce) {
+angular.module('dashboard').controller('DetailController', function($scope, supersonic, article, $sce) {
 
   			// Window message from index.html to prefill the template with data before doing any calls.
 			window.addEventListener("message", function(msg) {
