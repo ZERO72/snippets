@@ -1,0 +1,143 @@
+/* ZERO72 BASE 
+   ==================================================== */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+main, footer{
+	color:$dark;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+.ctn {
+	display: block;
+	position: relative;
+	width: auto;
+	height: auto;
+}
+
+.ctn-max {
+	width: 100%;
+}
+
+.ctn-center {
+	max-width: $container;
+	margin: 0 auto;
+
+	&.small {
+		max-width: $large;
+	}
+
+	&.small {
+		max-width: $large;
+	}
+}
+
+.clm {
+	float: left;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+
+// CLM SETS
+.clm-set-1 .clm {
+	width: 100%;
+}
+
+.clm-set-2 .clm {
+	width: 50%;
+}
+
+.clm-set-3 .clm {
+	width: 33.33%;
+}
+
+.clm-set-4 .clm {
+	width: 25%;
+}
+
+.clm-set-5 .clm {
+	width: 20%;
+}
+
+
+// COLUMNS
+.clm-35 {
+	width: 35%;
+}
+
+
+.clm-65 {
+	width: 65%;
+}
+
+
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid rgba(black, 0.2);
+	margin: 1em 0;
+	padding: 0;
+}
+
+/* =================
+   Form - inputs and stuff
+   ================= */
+form {
+
+	input{
+		@include border-radius(3px);
+		box-shadow:inset 1px 1px 1px rgba(0,0,0,0.2);
+		padding:2px 0px 3px 3px;
+		border:1px solid #999;
+	}
+}
+
+
+/* =================
+   Helper classes
+   ================= */
+
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+.padding {
+	padding: 20px;
+
+	@include phone {
+		padding: 20px;
+	}
+}
+
+.group:before, .group:after { 
+	content: " "; 
+	display: table; 
+}
+.group:after { 
+	clear: both; 
+
+}
+
+.full-width {
+	width: 100%;
+}
+
+.clear {
+	clear: both;
+}

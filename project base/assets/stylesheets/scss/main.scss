@@ -1,0 +1,120 @@
+/* ==================================================== */
+@import "helpers/mixins";
+
+/* ==================================================== */
+@import "helpers/mediaqueries";
+
+/* ==================================================== */
+@import "layout/base-client";
+
+/* ==================================================== */
+@import "layout/base-zero72";
+
+/* ==================================================== */
+@import "helpers/animations";
+
+
+/* ====================================================
+   Project base
+   ==================================================== */
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+html {
+	-webkit-font-smoothing: subpixel-antialiased;
+	font-smoothing: subpixel-antialiased;
+}
+
+body {
+	font-family: $font-regular;
+	font-size: 15px;
+	line-height: 1.2;
+	font-weight: $light;
+	color: black;
+	position: relative;
+	width: 100%;
+	overflow-x: hidden;
+	background: white;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+h1 {
+	font-size: $text-l;
+	font-weight: $normal;
+}
+
+h2 {
+	font-size: $text-m;
+	font-weight: $normal;
+}
+
+h3 {
+	font-size: $text-m;
+	font-weight: $normal;
+}
+
+p {
+	font-size: $text-s;
+}
+
+li {
+	list-style: none;
+	margin-left: 0;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+
+	&:hover {
+
+	}
+
+	&:focus {
+
+	}
+
+	&:active {
+
+	}
+}
+
+input {
+	border: 1px solid black;
+}
+
+.container {
+}
+
+main {
+	position: relative;
+	width: 100%;
+}
+
+.wrapper {
+	height: 100%;
+}
+
+.btn {
+
+}
+
+
+@include phone {}
+@include tablet {}
+
+
+/* ==================================================== */
+@import "layout/header";
+
+/* ==================================================== */
+@import "layout/footer";
+
+/* ==================================================== */
+@import "partials/items";
+
+/* ==================================================== */
+@import "partials/form";

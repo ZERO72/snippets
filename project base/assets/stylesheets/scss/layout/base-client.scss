@@ -1,0 +1,90 @@
+/* Client name
+	==================================================== */
+@font-face {
+	@include font-face(akzidenzgroteskregular, '../../fonts/akzidenzgrotesk-regular-webfont/akzidenzgrotesk-regular-webfont.eot', '../../fonts/akzidenzgrotesk-regular-webfont/akzidenzgrotesk-regular-webfont.woff', '../../fonts/akzidenzgrotesk-regular-webfont/akzidenzgrotesk-regular-webfont.ttf', '../../fonts/akzidenzgrotesk-regular-webfont/akzidenzgrotesk-regular-webfont.svg#akzidenzgroteskregular');
+}
+
+@font-face {
+	@include font-face(akzidenzgrotesk-boldcond, '../../fonts/akzidenzgrotesk-boldcond-webfont/akzidenzgrotesk-boldcond-webfont.eot', '../../fonts/akzidenzgrotesk-boldcond-webfont/akzidenzgrotesk-boldcond-webfont.woff', '../../fonts/akzidenzgrotesk-boldcond-webfont/akzidenzgrotesk-boldcond-webfont.ttf', '../../fonts/akzidenzgrotesk-boldcond-webfont/akzidenzgrotesk-boldcond-webfont.svg#akzidenzgrotesk-boldcond');
+}
+
+
+/* =================
+	Font
+	================= */
+$font-regular: 'akzidenzgroteskregular', sans-serif;
+$font-bold: 'akzidenzgroteskboldcond', sans-serif;
+
+
+.bold {
+	font-family: $font-bold;
+}
+
+
+// Weight
+$light: 300;
+$normal: 400;
+$bold: 700;
+$ultra-bold: 900;
+
+
+/* =================
+	Font sizes
+	================= */
+
+$text-l: 2.4em; // 36px uitgelicht item title
+$text-m: 1.6em; //24px programma titels, single video title
+$text-s: 1.067em; //16px header, submenu, body text,  auto suggest
+$text-p: 0.933em; //14px header, submenu, body text,  auto suggest
+
+
+/* =================
+	Content sizes
+	================= */
+
+$container: 1024px;
+$large: 720px;
+$medium: 500px;
+$small: 250px;
+
+
+/* =================
+	Colors
+	================= */
+$light-dark:#666666;
+$dark: #333333;
+
+
+/* =================
+	Text
+	================= */
+
+
+
+/* =================
+	Background
+	================= */
+.bg-white {
+	background: white;
+	color: black;
+}
+
+.bg-black {
+	background: black;
+	color: white;
+}
+
+/* =================
+	Buttons
+	================= */
+
+
+/* =================
+	Floats
+	================= */
+	.left{
+		float: left;
+	}
+	.right{
+		float: right;
+	}

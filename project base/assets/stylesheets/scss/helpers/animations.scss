@@ -1,0 +1,45 @@
+/* Animations
+   ==================================================== */
+
+// Page transitions
+@include keyframes(fadeOutUp) {
+	0% {
+		opacity: 1;
+		@include transform(translateY(0));
+	}
+	100% {
+		opacity: 0;
+		@include transform(translateY(-20px));
+	}
+}
+
+@include keyframes(fadeInDown) {
+	0% {
+		opacity: 0;
+		@include transform(translateY(-20px));
+	}
+	100% {
+		opacity: 1;
+		@include transform(translateY(0));
+	}
+}
+
+
+// Scroll down animation
+@include keyframes(slide-down) {
+	0% { @include transform(translateY(-15px)); opacity: 0; }
+	20% { @include transform(translateY(0)); opacity: 1; }
+	50% { @include transform(translateY(0)); opacity: 0; }
+	100% { @include transform(translateY(0)); opacity: 0; }
+}
+
+
+@include keyframes(slide-left) {
+	from { @include transform(translateX(10px));}
+	to { @include transform(translateX(0));}
+}
+
+@include keyframes(slide-right) {
+	from { @include transform(translateX(-10px));}
+	to { @include transform(translateX(0));}
+}
