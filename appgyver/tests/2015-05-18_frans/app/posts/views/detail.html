@@ -1,0 +1,27 @@
+<div ng-controller="DetailController">
+
+	<super-navbar>
+
+		<super-navbar-title id='super-navbar-title'>MyTitle</super-navbar-title>
+
+		<super-navbar-button class="share-btn" side='right' onclick="supersonic.ui.drawers.open('right')">
+			share
+		</super-navbar-button>
+	</super-navbar>
+
+	<div class="padding">
+		<img src="{{media}}" style="width:100%; height: auto; max-width: 100%;">
+
+		<h1 ng-bind-html="title"><!-- title --></h1>
+
+		<div class="content-ctn">
+			<div ng-show='busy'>
+				<i class="super-loading-c"></i> Loading...
+			</div>
+
+			<div ng-bind-html="content">
+				<!-- content -->
+			</div>
+		</div>
+	</div>
+</div>
