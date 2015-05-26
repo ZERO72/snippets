@@ -24,26 +24,25 @@
 	</div> -->
 
 
-	<div infinite-scroll='postStream.nextPage()' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='1'>
+	<div infinite-scroll='postStream.nextPage()' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='2'>
 
-		<div ng-repeat='item in postStream.items'>
+		<div ng-if="postStream.items" class="toggle" ng-repeat='item in postStream.items'>
 
 			<super-navigate view-id="posts" ng-click="pushIt(this.item)">
-				<!-- <span class='title'>
-					<a ng-href='{{item.url}}' target='_blank'>{{item.title}}</a>
-				</span> -->
-				<div class="item item-image" ng-if="item.attachments && item.attachments[0].url">
-					<img ng-if="item.attachments[0].url" src="{{item.attachments[0].url}}">
+				<div class="item item-image" ng-if="item.thumbnail_images && item.thumbnail_images.large.url">
+					<img ng-if="item.thumbnail_images.large.url" class="toggle" src="{{item.thumbnail_images.large.url}}"  width="{{item.thumbnail_images.large.width}}" height="{{item.thumbnail_images.large.height}}">
 				</div>
 
 				<div class="item item-divider">
-					<h2 ng-bind-html="trustAsHtml(item.title)"></h2>
+					<h2 ng-if="item.title" class="toggle" ng-bind-html="trustAsHtml(item.title)"></h2>
 				</div>
 			</super-navigate>
 
 		</div>
 
-		<div ng-show='postStream.busy'><i class="super-loading-c"></i>Loading...</div>
+		<div class="loading-box content" ng-show="postStream.busy">
+			<i class="super-loading-c"></i>
+		</div>
 	</div>
 
 </div>

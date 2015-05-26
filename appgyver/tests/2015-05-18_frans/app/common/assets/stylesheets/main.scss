@@ -1,0 +1,165 @@
+/* ==================================================== */
+@import "scss/helpers/mixins";
+
+/* ==================================================== */
+@import "scss/helpers/mediaqueries";
+
+/* ==================================================== */
+@import "scss/layout/base-client";
+
+/* ==================================================== */
+@import "scss/layout/base-zero72";
+
+/* ==================================================== */
+@import "scss/helpers/animations";
+
+
+/* ====================================================
+   Project base
+   ==================================================== */
+* {
+	-webkit-touch-callout:none; /* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust:none; /* prevent webkit from resizing text to fit */
+	-webkit-tap-highlight-color:rgba(0,0,0,0); /* prevent tap highlight color / shadow */
+	-webkit-user-select:none; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+html {
+	-webkit-font-smoothing: subpixel-antialiased;
+	font-smoothing: subpixel-antialiased;
+}
+
+body {
+	font-family: $font-regular;
+	font-size: 15px;
+	line-height: 1.2;
+	font-weight: $light;
+	color: black;
+	position: relative;
+	width: 100%;
+	overflow-x: hidden;
+	background: white;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+h1 {
+	font-size: $text-l;
+	font-weight: $normal;
+}
+
+h2 {
+	font-size: $text-m;
+	font-weight: $normal;
+}
+
+h3 {
+	font-size: $text-m;
+	font-weight: $normal;
+}
+
+p {
+	font-size: $text-s;
+}
+
+li {
+	list-style: none;
+	margin-left: 0;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+
+	&:hover {
+
+	}
+
+	&:focus {
+
+	}
+
+	&:active {
+
+	}
+}
+
+input {
+	border: 1px solid black;
+}
+
+.container {
+}
+
+main {
+	position: relative;
+	width: 100%;
+}
+
+.wrapper {
+	height: 100%;
+}
+
+.btn {
+
+}
+
+
+
+// LOADING
+.loading-box {
+	margin: 2em 0;
+	height:100%;
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+.super-loading-c {
+	font-size: 35px;
+}
+
+
+// FADE DATA
+.toggle{
+	@include transition(opacity, 0.5s, ease);
+}
+.toggle.ng-enter{
+	opacity: 0;
+}
+.toggle.ng-enter-active{
+	opacity: 1;
+}
+.toggle.ng-leave{
+	opacity: 1;
+}
+.toggle.ng-leave-active{
+	opacity: 0;
+}
+
+
+// ITEMS
+.toggle {
+	width: 100%;
+}
+
+.item-image {
+	width: 100%;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+
+/* ==================================================== */
+@import "scss/layout/header";
+
+/* ==================================================== */
+@import "scss/layout/footer";

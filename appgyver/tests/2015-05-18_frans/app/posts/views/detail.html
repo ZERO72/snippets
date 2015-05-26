@@ -10,16 +10,18 @@
 	</super-navbar>
 
 	<div class="padding">
-		<img src="{{media}}" style="width:100%; height: auto; max-width: 100%;">
+		<img src="{{featured_img.url}}" width="{{featured_img.width}}" height="{{featured_img.height}}" style="width:100%; height: auto; max-width: 100%;">
 
 		<h1 ng-bind-html="title"><!-- title --></h1>
 
 		<div class="content-ctn">
-			<div ng-show='busy'>
-				<i class="super-loading-c"></i> Loading...
+
+			<div class="loading-box content" ng-show="busy">
+				<i class="super-loading-c"></i>
 			</div>
 
-			<div ng-bind-html="content">
+
+			<div ng-if="content" class="toggle" ng-bind-html="content">
 				<!-- content -->
 			</div>
 		</div>

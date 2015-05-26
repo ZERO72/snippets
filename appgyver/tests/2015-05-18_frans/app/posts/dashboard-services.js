@@ -28,8 +28,7 @@ postServices.factory('PostStream', function($http){
 	PostStream.prototype.nextPage = function() {
 		if (this.busy) return;
 		this.busy = true;
-		// var url = global.serverUrl + '/wp-json/posts?page='+this.page;
-		var url = global.serverUrl + '/api/get_posts/?page='+ this.page +'&count=20';
+		var url = global.serverUrl + '/api/get_posts/?page='+ this.page +'&count=5';
 
 		$http.get(url).success(function(data) {
 			var items = data.posts;
@@ -43,6 +42,8 @@ postServices.factory('PostStream', function($http){
 
 		}.bind(this));
 	};
+
+	console.log(PostStream);
 
 	return PostStream;
 });

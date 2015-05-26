@@ -13,17 +13,17 @@ module.exports =
     {
       title: "Zoek"
       id: "search"
-      location: "posts#career" # Supersonic module#view type navigation
+      location: "posts#search" # Supersonic module#view type navigation
     }
     {
-      title: "Trending"
-      id: "trending"
-      location: "posts#style" # Supersonic module#view type navigation
+      title: "Activiteit"
+      id: "activity"
+      location: "posts#activity" # Supersonic module#view type navigation
     }
     {
       title: "Meer"
       id: "more"
-      location: "sidemenu#drawer" # Supersonic module#view type navigation
+      location: "posts#more" # Supersonic module#view type navigation
     }
   ]
 

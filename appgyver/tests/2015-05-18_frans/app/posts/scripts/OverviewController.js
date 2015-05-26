@@ -2,10 +2,11 @@ angular.module('posts').controller('OverviewController', function($scope, supers
 
 	// Function on click element to send data to Detail.html screen to prefill before doing any calls.
 	$scope.pushIt = function(i) {
+		console.log(i);
 		var objectId = i.id;
 		var objectTitle = i.title;
-		var objectMedia = i.attachments[0].url;
-		window.postMessage({ type: "posts", message: { id: objectId, title: objectTitle, media: objectMedia} }, "*") 
+		var objectMedia = i.thumbnail_images.large;
+		window.postMessage({ type: "posts", message: { id: objectId, title: objectTitle, featuredImage: objectMedia} }, "*") 
 	};
 
 	// var post_data = articles.query(function(data) {
@@ -18,6 +19,8 @@ angular.module('posts').controller('OverviewController', function($scope, supers
 
 	$scope.trustAsHtml = $sce.trustAsHtml;
 	$scope.postStream = new PostStream();
+
+	console.log(new PostStream());
 });
 
 // angular.filter('unsafe', function($sce) {

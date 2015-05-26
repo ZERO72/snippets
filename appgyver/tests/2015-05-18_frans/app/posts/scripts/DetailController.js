@@ -6,11 +6,11 @@ angular.module('posts').controller('DetailController', function($scope, superson
 		$scope.busy = false;
 
 		if(msg.data.type == "posts"){
+			console.log(msg.data);
 			$scope.busy = true;
 			$scope.id = msg.data.message.id;
 			$scope.title = $sce.trustAsHtml(msg.data.message.title);
-			console.log(msg.data.message.title);
-			$scope.media = msg.data.message.media;
+			$scope.featured_img = msg.data.message.featuredImage;
 			$scope.content = "";
 			$scope.$apply();
 
