@@ -1,0 +1,23 @@
+<style>
+.menu {
+	display: block;
+}
+.menu .item {
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding: 20px;
+	background: #efefef;
+}
+</style>
+
+<div ng-controller="MenuController">
+
+	<div class="">
+		<nav id="menu" class="menu">
+			<!-- <super-navigate class="item" location="posts#overview" onclick="steroids.drawers.hide()">News</super-navigate> -->
+			<li class="item" ng-click="doIt('posts#overview')">Nieuws</li>
+			<li class="item" ng-click="doIt('epg#overview')">EPG</li>
+		</nav>
+	</div>
+</div>

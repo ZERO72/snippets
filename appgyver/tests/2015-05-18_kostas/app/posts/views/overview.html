@@ -1,0 +1,48 @@
+<div ng-controller="OverviewController">
+
+	<super-navbar>
+		<super-navbar-button class="share-btn" side='left' onclick="supersonic.ui.drawers.open('left')">
+			menu
+		</super-navbar-button>
+	</super-navbar>
+
+
+<!-- 	<div ng-repeat="post in posts | filter:query" id="contentArea">
+
+		<super-navigate view-id="posts">
+			<div class="list card" data-title="{{post.title}}" data-media="{{post.attachments[0].url}" ng-click="pushIt(this.post)">
+				<div class="item item-image">
+					<img src="{{post.attachments[0].url}}">
+				</div>
+
+				<div class="item item-divider">
+					<h2 ng-bind-html="post.title | unsafe">{{post.title}}</h2>
+				</div>
+
+			</div>
+		</super-navigate>
+	</div> -->
+
+
+	<div infinite-scroll='postStream.nextPage()' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='2'>
+
+		<div ng-if="postStream.items" class="toggle" ng-repeat='item in postStream.items'>
+
+			<super-navigate view-id="posts" ng-click="pushIt(this.item)">
+				<div class="item item-image" ng-if="item.image">
+					<img ng-if="item.image" class="toggle" src="{{item.image}}" >
+				</div>
+
+				<div class="item item-divider">
+					<h2 ng-if="item.title" class="toggle" ng-bind-html="trustAsHtml(item.title)"></h2>
+				</div>
+			</super-navigate>
+
+		</div>
+
+		<div class="loading-box content" ng-show="postStream.busy">
+			<i class="super-loading-c"></i>
+		</div>
+	</div>
+
+</div>

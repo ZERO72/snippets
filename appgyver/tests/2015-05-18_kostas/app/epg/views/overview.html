@@ -1,0 +1,32 @@
+<div ng-controller="OverviewController">
+
+	<super-navbar>
+		<super-navbar-button class="share-btn" side='left' onclick="supersonic.ui.drawers.open('left')">
+			menu
+		</super-navbar-button>
+	</super-navbar>
+
+
+	<div infinite-scroll='postStream.nextPage()' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='2'>
+
+		<div ng-if="postStream.items" class="toggle" ng-repeat='item in postStream.items'>
+
+			<super-navigate view-id="posts" ng-click="pushIt(this.item)">
+				<div class="item item-image" ng-if="item.imageurl">
+					<img ng-if="item.imageurl" class="toggle" src="{{item.imageurl}}" >
+				</div>
+				<div>{{item.premiere}}</div>
+
+				<div class="item item-divider">
+					<h2 ng-if="item.title" class="toggle" ng-bind-html="trustAsHtml(item.title)"></h2>
+				</div>
+			</super-navigate>
+
+		</div>
+
+		<div class="loading-box content" ng-show="postStream.busy">
+			<i class="super-loading-c"></i>
+		</div>
+	</div>
+
+</div>
