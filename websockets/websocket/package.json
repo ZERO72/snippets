@@ -1,0 +1,11 @@
+{
+  "name": "websocket",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+	"socket.io":"latest"
+  },
+  "devDependencies": {
+    "grunt-steroids": "1.x"
+  }
+}

@@ -1,0 +1,46 @@
+<super-navbar>
+  <super-navbar-title>
+    Login
+  </super-navbar-title>
+</super-navbar>
+
+<div class="padding">
+
+  <p>Please use the mock log in button below to dismiss the Initial View and initialize the rest of your app.</p>
+
+   <button id="tester" class="button button-block button-balanced">Log in</button>
+
+  <button onclick="supersonic.ui.initialView.dismiss()" class="button button-block button-balanced">Log in</button>
+
+</div>
+
+<script src="http://149.210.199.4:3700/socket.io/socket.io.js"></script>
+<script>
+window.onload = function() {
+   var messages = [];
+   var socket = io.connect('http://149.210.199.4:3700');
+   var elConsole = document.getElementById("tester");
+
+	var consoleTimeout;
+
+   socket.on('message', function (data) {
+        if(data.message) {
+
+        clearTimeout(consoleTimeout);
+           elConsole.innerHTML = data.message;
+           elConsole.style.opacity = 1;
+          var consoleTimeout = setTimeout(function() {
+                elConsole.style.opacity = 0;
+            console.log(data.message);
+           },1700);
+
+          } else {
+            console.log("There is a problem:", data);
+        }
+    });
+
+elConsole.onclick = function() {
+        socket.emit('por', { message: '*por*' });
+    };
+}
+</script>

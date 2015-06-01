@@ -1,0 +1,110 @@
+<super-navbar>
+  <super-navbar-title>
+    Login
+  </super-navbar-title>
+</super-navbar>
+
+    <script src="http://149.210.199.4:3700/socket.io/socket.io.js"></script>
+
+
+<button id="buttonBlue">Blue</button>
+<button id="buttonRed">Red</button>
+<button id="buttonYellow">Yellow</button>
+
+<div id="sketch" style="height: 500px; width: 100%; background: #ccc;">
+  <canvas id="paint"></canvas>
+</div>
+
+
+<script>
+window.onload = function() {
+
+  // Let's set the array for the messages
+    var messages = [];
+    
+    // Connect to the socket, remote socket can be set with io.connect('http://youripordomain:yourserverport');
+    var socket = io.connect('http://149.210.199.4:3701');
+    
+    var buttonBlue = document.getElementById("buttonBlue");
+    var buttonRed = document.getElementById("buttonRed");
+    var buttonYellow = document.getElementById("buttonYellow");
+    
+
+
+// On click of the send button
+    buttonBlue.onclick = function() {
+      ctx.strokeStyle = 'blue'; 
+    };
+    buttonRed.onclick = function() {
+      ctx.strokeStyle = 'red';
+    };
+    buttonYellow.onclick = function() {
+      ctx.strokeStyle = 'yellow';
+    };
+
+// Canvas
+
+var canvas = document.querySelector('#paint');
+var ctx = canvas.getContext('2d');
+ 
+var sketch = document.querySelector('#sketch');
+var sketch_style = getComputedStyle(sketch);
+canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+
+var mouse = {x: 0, y: 0};
+ 
+/* Mouse Capturing Work */
+canvas.addEventListener('touchmove', function(e) {
+  mouse.x = e.touches[0].pageX; - this.offsetLeft;
+  mouse.y = e.touches[0].pageY; - this.offsetTop;
+}, false);
+
+/* Drawing on Paint App */
+ctx.lineWidth = 5;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.strokeStyle = 'blue';
+ 
+canvas.addEventListener('touchstart', function(e) {
+    //ctx.beginPath();
+    //ctx.moveTo(mouse.x, mouse.y);
+    socket.emit('touchy', { x: mouse.x, y: mouse.y, listener: 'mousedown', color: ctx.strokeStyle });
+ 
+    canvas.addEventListener('touchmove', onPaint, false);
+}, false);
+ 
+canvas.addEventListener('touchend', function() {
+    canvas.removeEventListener('touchmove', onPaint, false);
+}, false);
+ 
+var onPaint = function() {
+    //ctx.lineTo(mouse.x, mouse.y);
+    //ctx.stroke();
+    socket.emit('touchy', { x: mouse.x, y: mouse.y, listener: 'mousemove', color: ctx.strokeStyle });
+    
+};
+
+
+ socket.on('feely', function (data) {
+ 
+  if (data.listener == 'mousedown') {
+    ctx.strokeStyle = data.color;
+    ctx.beginPath();
+      ctx.moveTo(data.x, data.y);
+  }
+  
+    if (data.listener == 'mousemove') {
+      ctx.strokeStyle = data.color;
+    ctx.lineTo(data.x, data.y);
+      ctx.stroke();
+  } 
+ 
+ });
+
+}
+</script>
+
+
+</body>
+</html>

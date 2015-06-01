@@ -1,0 +1,61 @@
+<div class="padding">
+
+  <super-navbar>
+    <super-navbar-title>
+      Welcome to ZERO sockets
+    </super-navbar-title>
+  </super-navbar>
+
+<div class="padding">
+
+  <p>Please mock visitors by sending random messages to the ZERO72 website. No cursing please. Also no secrets, NSA is watching you too.</p>
+    <div id="content" style=
+    "width: 100%; height: 200px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;">
+    </div>
+
+    <div class="controls">
+        <input id="field" style="width:100%; padding: 15px; margin-bottom: 5px;">
+        <input id="send" style="display: block; width: 100%; display: block; padding: 15px; margin-bottom: 5px;" type="button" value="Send it">
+        <input id="lazy" style="display: block; width: 100%; display: block; padding: 15px;" type="button" value="I'm feelin' lazy..">
+    </div>
+
+
+</div>
+
+<script src="http://149.210.199.4:3700/socket.io/socket.io.js"></script>
+<script>
+window.onload = function() {
+   var messages = [];
+   var socket = io.connect('http://149.210.199.4:3700');
+     var field = document.getElementById("field");
+    var sendButton = document.getElementById("send");
+    var content = document.getElementById("content");
+    var lazy = document.getElementById("lazy");
+
+    socket.on('message', function (data) {
+        if(data.message) {
+            messages.push(data.message);
+            var html = '';
+            for(var i=0; i<messages.length; i++) {
+                html += messages[i] + '<br />';
+            }
+            content.innerHTML = html;
+        } else {
+            console.log("There is a problem:", data);
+        }
+    });
+
+    sendButton.onclick = function() {
+        var text = field.value;
+        socket.emit('send', { message: text });
+    };
+
+    lazy.onclick = function() {
+        var text = field.value;
+        socket.emit('por', { message: '*lazy por*' });
+    };
+
+}
+</script>
+
+</div>
