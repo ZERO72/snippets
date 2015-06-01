@@ -11,7 +11,7 @@
 
 		<div ng-if="postStream.items" class="toggle" ng-repeat='item in postStream.items'>
 
-			<super-navigate view-id="posts" ng-click="pushIt(this.item)">
+			<super-navigate view-id="posts-detail" ng-click="pushIt(this.item)">
 				<div class="item item-image" ng-if="item.imageurl">
 					<img ng-if="item.imageurl" class="toggle" src="{{item.imageurl}}" >
 				</div>

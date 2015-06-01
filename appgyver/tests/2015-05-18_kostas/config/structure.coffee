@@ -32,12 +32,16 @@ module.exports =
 
   preloads: [
     {
-      id: "posts"
+      id: "posts-overview"
+      location: "posts#overview"
+    }
+    {
+      id: "posts-detail"
       location: "posts#detail"
     }
     {
-      id: "using-the-scanner"
-      location: "example#using-the-scanner"
+      id: "epg-overview"
+      location: "epg#overview"
     }
   ]
 

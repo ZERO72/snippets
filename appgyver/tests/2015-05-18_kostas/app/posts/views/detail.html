@@ -1,12 +1,7 @@
 <div ng-controller="DetailController">
 
 	<super-navbar>
-
-		<super-navbar-title id='super-navbar-title'>MyTitle</super-navbar-title>
-
-		<super-navbar-button class="share-btn" side='left' onclick="supersonic.ui.drawers.open('left')">
-			share
-		</super-navbar-button>
+		<super-navbar-title id='super-navbar-title'></super-navbar-title>
 	</super-navbar>
 
 	<div class="padding">
@@ -19,7 +14,6 @@
 			<div class="loading-box content" ng-show="busy">
 				<i class="super-loading-c"></i>
 			</div>
-
 
 			<div ng-if="content" class="toggle" ng-bind-html="content">
 				<!-- content -->

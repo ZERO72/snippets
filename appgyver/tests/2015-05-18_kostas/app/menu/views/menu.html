@@ -12,12 +12,12 @@
 </style>
 
 <div ng-controller="MenuController">
-
 	<div class="">
 		<nav id="menu" class="menu">
-			<!-- <super-navigate class="item" location="posts#overview" onclick="steroids.drawers.hide()">News</super-navigate> -->
-			<li class="item" ng-click="doIt('posts#overview')">Nieuws</li>
-			<li class="item" ng-click="doIt('epg#overview')">EPG</li>
+<!-- 			<super-navigate class="item" view-id="posts-overview" data-params-id="jajaja">test</super-navigate> -->
+			<li class="item" ng-click="goTo('posts#overview', 'posts-overview', 'headlines')">Nieuws</li>
+			<li class="item" ng-click="goTo('posts#overview', 'posts-overview', 'sport')">Nieuws - cat1</li>
+			<li class="item" ng-click="goTo('epg#overview', 'epg-overview')">EPG</li>
 		</nav>
 	</div>
 </div>

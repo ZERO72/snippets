@@ -20,18 +20,35 @@ postServices.factory('article', ['$resource', function($resource){
 
 
 postServices.factory('PostStream', function($http){
+
 	var PostStream = function() {
 		this.items = [];
 		this.busy = false;
 		this.page = 1;
+		this.category = 'headlines';
+
+		// if (cat) {
+		// 	this.category = cat;
+		// }
+
+
 	};
 
-	PostStream.prototype.nextPage = function() {
+	PostStream.prototype.nextPage = function(cat) {
+		
 		if (this.busy) return;
 		this.busy = true;
 		var url = global.serverUrl + '/api/get_posts/?page='+ this.page +'&count=5';
 
-		var url = 'http://api.at5.nl/v1/news.json?token=4cf04da962671ffb01793cfd9fffac46410441a1&callback=1';
+		
+
+		if (cat) {
+			this.category = cat;
+			console.log(cat);
+		}
+
+		var url = 'http://api.at5.nl/v1/news.json?token=4cf04da962671ffb01793cfd9fffac46410441a1&category='+this.category;
+
 
 		$http.get(url).success(function(data) {
 
@@ -62,7 +79,7 @@ postServices.factory('PostStream', function($http){
 		// }.bind(this));
 	};
 
-	console.log(PostStream);
+	//console.log(PostStream);
 
 	return PostStream;
 });

@@ -27,6 +27,7 @@ angular.module('posts').controller('DetailController', function($scope, superson
 			});
 		}
 
+
 	});
 
 });

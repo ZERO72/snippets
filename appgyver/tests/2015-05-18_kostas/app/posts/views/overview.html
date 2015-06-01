@@ -23,26 +23,48 @@
 		</super-navigate>
 	</div> -->
 
+	<div style="color: #333;" ng-bind-html="theAbused"></div>
+	<div style="color: #f00;" ng-bind-html="theAbused2"></div>
+	<button class="item" ng-click="testClick()">Test it</button>
 
-	<div infinite-scroll='postStream.nextPage()' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='2'>
+	<section class="latest-news news-view">
+		<article infinite-scroll='postStream.nextPage(theAbused2)' infinite-scroll-disabled='postStream.busy' infinite-scroll-distance='2' class="column content-column">
 
-		<div ng-if="postStream.items" class="toggle" ng-repeat='item in postStream.items'>
+			<ul class="related-news at5">
 
-			<super-navigate view-id="posts" ng-click="pushIt(this.item)">
-				<div class="item item-image" ng-if="item.image">
-					<img ng-if="item.image" class="toggle" src="{{item.image}}" >
+				<li ng-if="postStream.items" class="toggle news-post" ng-repeat='item in postStream.items'>
+
+					<super-navigate view-id="posts-detail" ng-click="pushIt(this.item)" class="news-post">
+					    <div class="column related-image-column" style="position: relative; top: 0; left: 0;">
+					        <img src="{{item.image}}" alt="{{item.title}}" title="{{item.title}}">                  
+					    </div>
+					    <div class="column related-text-column">
+					        <h2>{{item.title}}</h2>
+					    </div>
+				    </super-navigate>
+
+					<!-- <super-navigate view-id="posts-detail" ng-click="pushIt(this.item)" class="news-post">
+						<div class="item item-image" ng-if="item.image">
+							<img ng-if="item.image" class="toggle" src="{{item.image}}" >
+						</div>
+						<div ng-if="item.content" ng-bind-html="trustAsHtml(item.content)">
+						</div>
+
+						<div class="item item-divider">
+							<h2 ng-if="item.title" class="toggle" ng-bind-html="trustAsHtml(item.title)"></h2>
+						</div>
+					</super-navigate> -->
+
+				</li>
+
+				<div class="loading-box content" ng-show="postStream.busy">
+					<i class="super-loading-c"></i>
 				</div>
 
-				<div class="item item-divider">
-					<h2 ng-if="item.title" class="toggle" ng-bind-html="trustAsHtml(item.title)"></h2>
-				</div>
-			</super-navigate>
+			</ul>
 
-		</div>
+		</article>
+	</section>
 
-		<div class="loading-box content" ng-show="postStream.busy">
-			<i class="super-loading-c"></i>
-		</div>
-	</div>
 
 </div>
