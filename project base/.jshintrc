@@ -1,6 +1,7 @@
 {
     "undef"         : true,     // true: Require all non-global variables to be declared (prevents global leaks)
-    "unused"        : true,     // Unused variables:
+    "unused"        : true,     // Unused variables
+    "indent"        : 1,
     "globals"       : {         // additional predefined global variables
             "window": true,
             "localStorage": true,
