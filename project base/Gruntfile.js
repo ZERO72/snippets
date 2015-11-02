@@ -40,8 +40,11 @@ module.exports = function(grunt) {
 		jshint: {
 			all: [
 				'Gruntfile.js',
-				'assets/js/*.js'
-			]
+				'app/**/*.js'
+			],
+			options: {
+				'jshintrc': true
+			}
 		},
 		concat: {
 			options: { "separator": "\n" },
