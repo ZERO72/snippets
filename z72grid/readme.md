@@ -12,6 +12,7 @@ A reusable angular module you can add to any project
 
 ##Dependencies
 The z72grid requires the following libraries (apart from angular itself):
+
 1. Lodash
 2. TweenMax
 3. ngDraggable
@@ -19,3 +20,32 @@ The z72grid requires the following libraries (apart from angular itself):
 These libraries are available via the /dependecies folder, but they are not kept up-to-date. It is advisable to manage these packages yourself.
 
 ##How to use
+In the parent controller you will need a repeating object with modules to place in the grid. Preferably with some initial grid-layout values, i.e.:
+
+```
+	$scope.thingsInGrid = [
+	{
+		"name": "Item 1",
+		"grid_config": {
+			xPos: 1,
+			yPos: 1,
+			xUnits: 2,
+			yUnits: 2,
+			xMinSize: 1,
+			yMinSize: 1,
+		}
+	}, {
+	.....
+	}, {
+		"name": "Item 4",
+		"board_config": {
+			xPos: 5,
+			yPos: 8,
+			xUnits: 2,
+			yUnits: 2,
+			xMinSize: 1,
+			yMinSize: 1,
+		}
+	}];
+}]);
+```
