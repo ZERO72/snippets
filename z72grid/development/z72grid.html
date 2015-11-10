@@ -1,0 +1,19 @@
+<div 
+	class="z72grid-container" 
+	ng-drop="true" 
+	ng-drag-start="onDragStart($data, $event)" 
+	ng-drag-move="onDragMove($data, $event)" 
+	ng-drag-stop="onDragStop($data,$event)"
+>
+	<ng-transclude 
+		grid="grid"
+	></ng-transclude>
+	
+	<div 
+		ng-if="grid.dragInProgress || grid.resizeInProgress" 
+		class="gridhighlighter" 
+		ng-class="{forbidden: !grid.placeAllowed}" 
+		ng-style="getHighlighterPositionAndSize()"
+	></div>
+
+</div>

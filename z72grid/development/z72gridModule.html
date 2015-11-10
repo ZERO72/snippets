@@ -1,0 +1,19 @@
+<div 
+	class="z72grid-module" 
+	ng-drag="true" 
+	ng-drag-data="module[configPropertyName]" 
+	ng-class="{dragging: isDragging(), resizing: isResising(), editing: isEditing()}" 
+	ng-style="getPositionAndSize()"
+>
+	<div 
+		ng-drag-handle 
+		class="draghandle"
+	></div>
+
+	<div 
+		class="resizehandle img-set" 
+		ng-mousedown="onResizeStart($event)"
+	></div>
+
+	<div class="content" ng-transclude></div>
+</div>

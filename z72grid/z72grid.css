@@ -1,0 +1,50 @@
+.z72grid-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.z72grid-container .gridhighlighter{
+	background-color: green;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 8;
+	transition: width 0.35s, height 0.35s, top 0.15s, left 0.15s;
+}
+
+.z72grid-container .gridhighlighter.forbidden{
+	background-color: red;
+}
+.z72grid-module {
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	z-index: 9;
+	opacity: 1;
+	transition: width 0.35s, height 0.35s;
+}
+.z72grid-module.editing {
+	opacity: 0.5;
+	transition: width 0s, height 0s;
+}
+.z72grid-module .draghandle {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 95%;
+	cursor: move;
+	z-index: 10;
+}
+.z72grid-module .resizehandle {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	cursor: nwse-resize;
+	z-index: 11;
+}
