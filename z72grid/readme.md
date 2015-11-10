@@ -23,36 +23,35 @@ These libraries are available via the /dependecies folder, but they are not kept
 
 ###Ctrl
 In the parent controller you will need a repeating object with modules to place in the grid. Preferably with some initial grid-layout values, i.e.:
-```
-	$scope.thingsInGrid = [
-	{
-		"name": "Item 1",
-		"grid_config": {
-			xPos: 1,
-			yPos: 1,
-			xUnits: 2,
-			yUnits: 2,
-			xMinSize: 1,
-			yMinSize: 1,
-		}
-	}, {
-	.....
-	}, {
-		"name": "Item 4",
-		"grid_config": {
-			xPos: 5,
-			yPos: 8,
-			xUnits: 2,
-			yUnits: 2,
-			xMinSize: 1,
-			yMinSize: 1,
-		}
-	}];
-}]);
+```javascript
+$scope.thingsInGrid = [
+{
+	"name": "Item 1",
+	"grid_config": {
+		xPos: 1,
+		yPos: 1,
+		xUnits: 2,
+		yUnits: 2,
+		xMinSize: 1,
+		yMinSize: 1,
+	}
+}, {
+.....
+}, {
+	"name": "Item 4",
+	"grid_config": {
+		xPos: 5,
+		yPos: 8,
+		xUnits: 2,
+		yUnits: 2,
+		xMinSize: 1,
+		yMinSize: 1,
+	}
+}];
 ```
 ###View
 Your markup should look like this:
-```
+```html
 <div id="gridwrap">
 	<z72grid data-x-units="12" data-y-units="12">
 		<z72gridmodule ng-repeat="thing in thingsInGrid" module="thing" config-property-name="grid_config">
@@ -61,8 +60,7 @@ Your markup should look like this:
 	</z72grid>
 </div>
 ````
-Where:
-
+####Where:
 - The **#gridwrap** div is a container for the grid that determines the full grid size, the grid will scale to 100% height and width of this container
 - **data-x-units** and **data-y-units** refer to the number of horizontal and vertical units the grid wil contain. A low number will mean the grid modules snap to widely distributed points, and a high number will make them snap to points that are closer together.
 - **module** is the object you want to be placed in the grid.
