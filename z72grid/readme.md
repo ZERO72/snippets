@@ -20,8 +20,9 @@ The z72grid requires the following libraries (apart from angular itself):
 These libraries are available via the /dependecies folder, but they are not kept up-to-date. It is advisable to manage these packages yourself.
 
 ##How to use
-In the parent controller you will need a repeating object with modules to place in the grid. Preferably with some initial grid-layout values, i.e.:
 
+###Ctrl
+In the parent controller you will need a repeating object with modules to place in the grid. Preferably with some initial grid-layout values, i.e.:
 ```
 	$scope.thingsInGrid = [
 	{
@@ -38,7 +39,7 @@ In the parent controller you will need a repeating object with modules to place 
 	.....
 	}, {
 		"name": "Item 4",
-		"board_config": {
+		"grid_config": {
 			xPos: 5,
 			yPos: 8,
 			xUnits: 2,
@@ -49,3 +50,20 @@ In the parent controller you will need a repeating object with modules to place 
 	}];
 }]);
 ```
+###View
+Your markup should look like this:
+```
+<div id="gridwrap">
+	<z72grid data-x-units="12" data-y-units="12">
+		<z72gridmodule ng-repeat="thing in thingsInGrid" module="thing" config-property-name="grid_config">
+			<div class="example-content">{{thing.name}} PLACE ANYTHING HERE YOU'D LIKE </div>
+		</z72gridmodule>
+	</z72grid>
+</div>
+````
+Where:
+
+- The **#gridwrap** div is a container for the grid that determines the full grid size, the grid will scale to 100% height and width of this container
+- **data-x-units** and **data-y-units** refer to the number of horizontal and vertical units the grid wil contain. A low number will mean the grid modules snap to widely distributed points, and a high number will make them snap to points that are closer together.
+- **module** is the object you want to be placed in the grid.
+- **config-property-name** is the name of the object property where the grid postion and size attributes will be stored. If this property does not exist yet, it will be created for you.
