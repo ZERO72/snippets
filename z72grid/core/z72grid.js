@@ -65,7 +65,6 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 			var inModuleRange;
 			// First clear old positions if needed
 			if (old) {
-				console.log('clearing');
 				self.doForGridUnitsInRange(old, gridUnits, 'clear');
 			}
 			// Take new positions
@@ -74,7 +73,6 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 
 		self.doForGridUnitsInRange = function (conf, gridUnits, action) {
 			var gridUnit, hasOverlap;
-			console.log(conf);
 			// Horizontal range
 			hasOverlap = false;
 			for (var x = conf.xPos; x < (conf.xPos + conf.xUnits); x++) {
@@ -83,20 +81,15 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					gridUnit = gridUnits['x'+x+'y'+y];
 					switch(action) {
 						case 'clear':
-							console.log('should be clearing unit at x: ' + x + ' y: ' + y);
-							console.log('clearing unit:', gridUnit);
 							gridUnit.uid   = null;
 							gridUnit.taken = false;
 							break;
 						case 'take':
-							console.log('should be TAKING unit at x: ' + x + ' y: ' + y);
-							console.log('TAKING unit:', gridUnit);
 							gridUnit.uid   = conf.uid;
 							gridUnit.taken = true;
 							break;
 						case 'check':
 							if (gridUnit.taken && gridUnit.uid !== conf.uid) {
-								// console.log('hasOverlap');
 								hasOverlap = true;
 							}
 							break;
