@@ -31,13 +31,10 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 			};
 			for (var y = 1; y <= yUnits; y++) {
 				for (var x = 1; x <= xUnits; x++) {
-					gridUnit = {
-						xPos : x,
-						yPos : y,
+					grid.units['x'+x+'y'+y] = {
 						taken: false,
 						uid: null
 					};
-					grid.units.push(gridUnit);
 				}
 			}
 			return grid;
@@ -64,21 +61,54 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 		 * @param {object} conf	The configuration of a module being moved or resized
 		 * @param {array} gridUnits	The grid units
 		 */
-		self.setGridItemsForModule = function (conf, gridUnits) {
+		self.setGridItemsForModule = function (curr, gridUnits, old) {
 			var inModuleRange;
-			_.forEach(gridUnits, function(gridUnit) {
-				inModuleRange = self.isInModuleRange(conf, gridUnit);
-				// First clear existing grid items if needed
-				if (gridUnit.uid === conf.uid && !inModuleRange) {
-					gridUnit.uid   = null;
-					gridUnit.taken = false;
+			// First clear old positions if needed
+			if (old) {
+				console.log('clearing');
+				self.doForGridUnitsInRange(old, gridUnits, 'clear');
+			}
+			// Take new positions
+			self.doForGridUnitsInRange(curr, gridUnits, 'take');
+		};
+
+		self.doForGridUnitsInRange = function (conf, gridUnits, action) {
+			var gridUnit, hasOverlap;
+			console.log(conf);
+			// Horizontal range
+			hasOverlap = false;
+			for (var x = conf.xPos; x < (conf.xPos + conf.xUnits); x++) {
+				// Vertical range
+				for (var y = conf.yPos; y < (conf.yPos + conf.yUnits); y++) {
+					gridUnit = gridUnits['x'+x+'y'+y];
+					switch(action) {
+						case 'clear':
+							console.log('should be clearing unit at x: ' + x + ' y: ' + y);
+							console.log('clearing unit:', gridUnit);
+							gridUnit.uid   = null;
+							gridUnit.taken = false;
+							break;
+						case 'take':
+							console.log('should be TAKING unit at x: ' + x + ' y: ' + y);
+							console.log('TAKING unit:', gridUnit);
+							gridUnit.uid   = conf.uid;
+							gridUnit.taken = true;
+							break;
+						case 'check':
+							if (gridUnit.taken && gridUnit.uid !== conf.uid) {
+								// console.log('hasOverlap');
+								hasOverlap = true;
+							}
+							break;
+					}
+					if (hasOverlap) {
+						break;
+					}
 				}
-				// Then take the new ones
-				if (inModuleRange) {
-					gridUnit.uid   = conf.uid;
-					gridUnit.taken = true;
-				}
-			});
+			}
+			if (action==='check') {
+				return hasOverlap;
+			}
 		};
 
 		/**
@@ -128,33 +158,8 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 		 */
 		self.checkForOverlap = function (gridHighlighter, gridUnits) {
 			var hasOverlap;
-			hasOverlap = false;
-			_.forEach(gridUnits, function (gridUnit) {
-				if (gridUnit.taken && gridUnit.uid !== gridHighlighter.uid) {
-					hasOverlap = self.isInModuleRange(gridHighlighter, gridUnit);
-					if (hasOverlap) {
-						return false;
-					}
-				}
-			});
+			hasOverlap = self.doForGridUnitsInRange(gridHighlighter, gridUnits, 'check');
 			return hasOverlap;
-		};
-
-		/**
-		 * Checks if a module is in the range of a a given grid unit item
-		 * @param {object} conf	The configuration of a module being moved or resized
-		 * @param  {object} gridUnit A grid unit
-		 * @return {Boolean} Returns true if the grid item is in range of the module
-		 */
-		self.isInModuleRange = function (conf, gridUnit) {
-			var inModuleRange;
-			inModuleRange = false;
-			if ( (gridUnit.xPos >= conf.xPos && gridUnit.xPos < conf.xPos + conf.xUnits) && 
-				 (gridUnit.yPos >= conf.yPos && gridUnit.yPos < conf.yPos + conf.yUnits)
-				) {
-				inModuleRange = true;
-			}
-			return inModuleRange;
 		};
 
 	}])
@@ -217,11 +222,12 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					conf.dragging              = false;
 					$scope.grid.dragInProgress = false;
 					if ($scope.grid.placeAllowed) {
-						var originLeft, originTop;
+						var oldConf, originLeft, originTop;
+						oldConf	   = _.clone(conf);
 						originLeft = (conf.xPos - 1) * $scope.grid.unitWidthInPx;
 						originTop  = (conf.yPos - 1)  * $scope.grid.unitHeightInPx;
 						utils.placeOnGridHighlighter(conf, $scope.gridHighlighter);
-						utils.setGridItemsForModule(conf, $scope.grid.units);
+						utils.setGridItemsForModule(conf, $scope.grid.units, oldConf);
 						animateDraggedElemToSlot(conf, event, 'place', originLeft, originTop);
 					} else {
 						animateDraggedElemToSlot(conf, event, 'revert');
@@ -245,7 +251,7 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					$scope.grid.height         = gridEl.offsetHeight;
 					$scope.grid.unitWidthInPx  = gridEl.offsetWidth / $scope.grid.xUnits;
 					$scope.grid.unitHeightInPx = gridEl.offsetHeight / $scope.grid.yUnits;
-        		});
+				});
 
 				/**
 				 * Moves the grid highlighter along the grid when the user is dragging
@@ -326,7 +332,7 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 				scope.gridHighlighter = gridCtrl.gridHighlighter;
 			},
 			controller: ['$scope', '$document', 'z72gridUtils', function($scope, $document, z72gridUtils) {
-				var utils, conf, unbindGridWatcher, resizeHelper;
+				var utils, conf, unbindGridWatcher, resizeStartProps;
 				//////////////////////////////////////////////////
 				// Initialization funtions and helper variables //
 				//////////////////////////////////////////////////
@@ -343,7 +349,7 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					unbindGridWatcher();
 				});
 				// A helper object at controller level needed by the resize functions. Will receive properties from initResize
-				resizeHelper = {};
+				resizeStartProps = {};
 
 				///////////////////////////////////////////
 				// State variables controlling the style //
@@ -394,10 +400,13 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 				$scope.onResizeStart = function (event) {
 					conf.resizing                = true;
 					$scope.grid.resizeInProgress = true;
-					resizeHelper.startX          = event.pageX;
-					resizeHelper.startY          = event.pageY;
-					resizeHelper.startWidth      = conf.xUnits;
-					resizeHelper.startHeight     = conf.yUnits;
+					resizeStartProps.pageX       = event.pageX;
+					resizeStartProps.pageY       = event.pageY;
+					resizeStartProps.xPos        = conf.xPos;
+					resizeStartProps.yPos        = conf.yPos;
+					resizeStartProps.xUnits      = conf.xUnits;
+					resizeStartProps.yUnits      = conf.yUnits;
+					resizeStartProps.uid         = conf.uid;
 					utils.mirrorGridHighlighter($scope.gridHighlighter, conf);
 					// Add event listeners for resizing
 					$document.on("mousemove", function (event) {
@@ -418,10 +427,10 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					if (!conf.resizing) {
 						return false;
 					}
-					xChange     = event.pageX - resizeHelper.startX; 
-					yChange     = event.pageY - resizeHelper.startY;
-					conf.xUnits = resizeHelper.startWidth + (xChange / $scope.grid.unitWidthInPx);
-					conf.yUnits = resizeHelper.startHeight + (yChange / $scope.grid.unitHeightInPx);
+					xChange     = event.pageX - resizeStartProps.pageX; 
+					yChange     = event.pageY - resizeStartProps.pageY;
+					conf.xUnits = resizeStartProps.xUnits + (xChange / $scope.grid.unitWidthInPx);
+					conf.yUnits = resizeStartProps.yUnits + (yChange / $scope.grid.unitHeightInPx);
 					resizeHighlighterInGrid(event);
 					// ResizeHighlighterInGrid will switch the placeAllowed to false if the module becomes smaller than its minimal size
 					// So we only check for overlap if this is not the case
@@ -443,11 +452,11 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					$scope.grid.resizeInProgress = false;
 					if ($scope.grid.placeAllowed) {
 						utils.placeOnGridHighlighter(conf, $scope.gridHighlighter);
-						utils.setGridItemsForModule(conf, $scope.grid.units);
+						utils.setGridItemsForModule(conf, $scope.grid.units, resizeStartProps);
 					} else {
 						// Revert back to original size
-						conf.xUnits = resizeHelper.startWidth;
-						conf.yUnits = resizeHelper.startHeight;
+						conf.xUnits = resizeStartProps.xUnits;
+						conf.yUnits = resizeStartProps.yUnits;
 					}
 					$scope.$apply();
 				}
@@ -461,7 +470,7 @@ angular.module('z72grid', ['ngDraggable', 'z72grid'])
 					if ($scope.gridHighlighter.yPos + conf.yUnits - 1 <= $scope.grid.yUnits && conf.yUnits >= conf.yMinSize) {
 						$scope.gridHighlighter.yUnits = Math.round(conf.yUnits);
 					}
-					if (conf.xUnits < conf.xMinSize || conf.yUnits < conf.yMinSize) {
+					if (Math.round(conf.xUnits) < conf.xMinSize || Math.round(conf.yUnits) < conf.yMinSize) {
 						$scope.grid.placeAllowed = false;
 					} else {
 						$scope.grid.placeAllowed = true;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="hostApp">
+	<head>
+		<title>Host app for the grid</title>
+
+
+		<title>Host app for the grid</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta charset="UTF-8">
+		
+		<link rel="stylesheet" href="../core/z72grid.css">
+		<link rel="stylesheet" href="style.css">
+
+	</head>
+	<body>
+
+		<div class="wrapper" ng-controller="mainController">
+			<div class="header">
+				<h3>Header - Things we want in grid</h3>
+				<div>
+					<span ng-repeat="thing in thingsInGrid">{{thing.name}} || </span>
+				</div>
+			</div>
+			<div id="gridwrap">
+				<z72grid data-x-units="12" data-y-units="12">
+					<z72gridmodule ng-repeat="thing in thingsInGrid" module="thing" config-property-name="board_config">
+						<div class="example-content">{{thing.name}} PLACE ANYTHING HERE YOU'D LIKE </div>
+					</z72gridmodule>
+				</z72grid>
+			</div>
+			<div class="push"></div>
+		</div>
+
+		<div class="footer">
+			<h3>Footer</h3>
+		</div>
+		
+		<script src="../dependencies/lodash/lodash.js"></script>
+		<script src="angular.js"></script>
+		<script src="../dependencies/ngDraggable/ngDraggable.js"></script>
+		<script src="../dependencies/gsap/TweenMax.min.js"></script>
+		<script src="../core/z72grid.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
